@@ -1,0 +1,117 @@
+<dataSource name="MySQL - seckill@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="seckill">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="information_schema" />
+    <schema id="3" name="mysql" />
+    <schema id="4" name="performance_schema" />
+    <schema id="5" name="sys" />
+    <table id="6" parent="1" name="seckill">
+      <comment>秒杀库存表</comment>
+    </table>
+    <table id="7" parent="1" name="success_killed">
+      <comment>秒杀成功明细表</comment>
+    </table>
+    <routine id="8" parent="1" name="execute_seckill">
+      <routine-kind>PROCEDURE</routine-kind>
+    </routine>
+    <column id="9" parent="6" name="seckill_id">
+      <comment>商品库存id</comment>
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="10" parent="6" name="name">
+      <comment>商品名称</comment>
+      <mandatory>1</mandatory>
+      <data-type>varchar(120)|0</data-type>
+    </column>
+    <column id="11" parent="6" name="number">
+      <comment>库存数量</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="12" parent="6" name="start_time">
+      <comment>秒杀开始时间</comment>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="13" parent="6" name="end_time">
+      <comment>秒杀结束时间</comment>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>'0000-00-00 00:00:00'</default-expression>
+    </column>
+    <column id="14" parent="6" name="create_time">
+      <comment>创建时间</comment>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <index id="15" parent="6" name="idx_create_time">
+      <columns>create_time</columns>
+      <desc-columns />
+    </index>
+    <index id="16" parent="6" name="idx_end_time">
+      <columns>end_time</columns>
+      <desc-columns />
+    </index>
+    <index id="17" parent="6" name="idx_start_time">
+      <columns>start_time</columns>
+      <desc-columns />
+    </index>
+    <key id="18" parent="6" name="PRIMARY">
+      <columns>seckill_id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="19" parent="7" name="seckill_id">
+      <comment>秒杀商品id</comment>
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="20" parent="7" name="user_phone">
+      <comment>用户手机号</comment>
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="21" parent="7" name="state">
+      <comment>状态标示：-1:无效 0：成功 1：已付款 2：已发货</comment>
+      <mandatory>1</mandatory>
+      <data-type>tinyint(4)|0</data-type>
+      <default-expression>'-1'</default-expression>
+    </column>
+    <column id="22" parent="7" name="create_time">
+      <comment>创建时间</comment>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <index id="23" parent="7" name="idx_create_time">
+      <columns>create_time</columns>
+      <desc-columns />
+    </index>
+    <key id="24" parent="7" name="PRIMARY">
+      <columns>seckill_id
+user_phone</columns>
+      <primary>1</primary>
+    </key>
+    <argument id="25" parent="8" name="v_seckill_id">
+      <direction>IN</direction>
+      <data-type>bigint(20)|0</data-type>
+    </argument>
+    <argument id="26" parent="8" name="v_phone">
+      <direction>IN</direction>
+      <data-type>bigint(20)|0</data-type>
+    </argument>
+    <argument id="27" parent="8" name="v_kill_time">
+      <direction>IN</direction>
+      <data-type>timestamp|0</data-type>
+    </argument>
+    <argument id="28" parent="8" name="r_result">
+      <direction>OUT</direction>
+      <data-type>int(11)|0</data-type>
+    </argument>
+  </database-model>
+</dataSource>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1"
+         metadata-complete="true">
+  <!-- 修改Servlet版本为3.1 -->
+  <!-- 1:配置DispatcherServlet,用于控制Contrullor-->
+    <servlet>
+      <servlet-name>seckill-dispatcher</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!-- 配置SprngMVC 需要加载的配置文件
+    Spring-dao.xml,spring-service.xml,spring-web.xml
+    Mybatis->spring->springMVC
+    -->
+      <init-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring/spring-*.xml</param-value>
+      </init-param>
+    </servlet>
+  <!-- 2. 配置Servlet-mapping，对URL进行映射
+   “/”表示对所有URL进行处理-->
+    <servlet-mapping>
+      <servlet-name>seckill-dispatcher</servlet-name>
+      <url-pattern>/</url-pattern>
+    </servlet-mapping>
+  </web-app>
